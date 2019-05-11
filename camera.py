@@ -1,4 +1,5 @@
 import cv2
+from detection import Detection
 
 class VideoCamera(object):
     def __init__(self):
@@ -11,10 +12,23 @@ class VideoCamera(object):
 
     def get_frame(self):
         success, image = self.video.read()
-        ret, jpeg = cv2.imencode('.jpg', image)
+        converted_frame = Detection(image)
+        facedetected_frame = converted_frame.face_detection()
+        ret, jpeg = cv2.imencode('.jpg', facedetected_frame)
+        # ret, jpeg = cv2.imencode('.jpg', image)
         return jpeg.tobytes()
 
         # read()は、二つの値を返すので、success, imageの2つ変数で受けています。
         # OpencVはデフォルトでは raw imagesなので JPEGに変換
         # ファイルに保存する場合はimwriteを使用、メモリ上に格納したい時はimencodeを使用
         # cv2.imencode() は numpy.ndarray() を返すので .tobytes() で bytes 型に変換
+
+    def get_motion_detection(self, frame):
+        success, image = self.video.read()
+        converted_frame = Detection(image)
+        frame, facedetected_frame = converted_frame.motion_detection(frame)
+        if not facedetected_frame:
+            return frame, None
+        ret, jpeg = cv2.imencode('.jpg', facedetected_frame)
+        # ret, jpeg = cv2.imencode('.jpg', image)
+        return frame, jpeg.tobytes()
