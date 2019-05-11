@@ -47,10 +47,6 @@ def generate(camera):
     first_frame = None
     while True:
         first_frame, frame = camera.get_motion_detection(first_frame)
-        # converted_frame = Detection(frame)
-        # facedetected_frame = converted_frame.face_detection()
-        if not first_frame:
-            continue
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 

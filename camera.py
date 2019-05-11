@@ -27,8 +27,8 @@ class VideoCamera(object):
         success, image = self.video.read()
         converted_frame = Detection(image)
         frame, facedetected_frame = converted_frame.motion_detection(frame)
-        if not facedetected_frame:
-            return frame, None
+        # if not facedetected_frame:
+        #     return frame, None
         ret, jpeg = cv2.imencode('.jpg', facedetected_frame)
         # ret, jpeg = cv2.imencode('.jpg', image)
         return frame, jpeg.tobytes()
