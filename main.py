@@ -13,6 +13,9 @@ def index():
     if request.method == "POST":
         return render_template('index.html', video_detect = request.form["video_value"])
     else:
+        # filename = './disconnedted.jpg'
+        # bi = BytesIO(filename)
+        # return send_file(bi, mimetype='image/jpeg')
         return render_template('index.html')
 
     # "/" を呼び出したときには、indexが表示される。
