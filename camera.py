@@ -11,11 +11,10 @@ class VideoCamera(object):
         self.video.release()
 
     def get_frame(self):
-        success, image = self.video.read()
+        _, image = self.video.read()
         converted_frame = Detection(image)
         facedetected_frame = converted_frame.face_detection()
-        ret, jpeg = cv2.imencode('.jpg', facedetected_frame)
-        # ret, jpeg = cv2.imencode('.jpg', image)
+        _, jpeg = cv2.imencode('.jpg', facedetected_frame)
         return jpeg.tobytes()
 
         # read()は、二つの値を返すので、success, imageの2つ変数で受けています。
@@ -24,11 +23,8 @@ class VideoCamera(object):
         # cv2.imencode() は numpy.ndarray() を返すので .tobytes() で bytes 型に変換
 
     def get_motion_detection(self, frame):
-        success, image = self.video.read()
+        _ image = self.video.read()
         converted_frame = Detection(image)
         frame, facedetected_frame = converted_frame.motion_detection(frame)
-        # if not facedetected_frame:
-        #     return frame, None
-        ret, jpeg = cv2.imencode('.jpg', facedetected_frame)
-        # ret, jpeg = cv2.imencode('.jpg', image)
+        _, jpeg = cv2.imencode('.jpg', facedetected_frame)
         return frame, jpeg.tobytes()
