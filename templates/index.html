@@ -22,10 +22,8 @@
     </div>
     {% if video_detect == 'Motion' %}
     <img src="{{ url_for('face_detect') }}">
-    <!-- jinja2のテンプレートの書き方です。/video_feedを呼び出しています。 -->
     {% elif video_detect == 'Face' %}
     <img src="{{ url_for('video_feed') }}">
-    <!-- jinja2のテンプレートの書き方です。/video_feedを呼び出しています。 -->
     {% else %}
     <div>
       <br>

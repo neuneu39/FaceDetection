@@ -35,7 +35,5 @@ class Detection(object):
             (x, y, w, h) = cv2.boundingRect(contour)
             cv2.rectangle(self.frame, (x, y), (x+w, y+h), (0, 255, 0), 3)
 
-        # return self.frame
-        # return first_frame, thresh_frame_dilate.copy()
         return first_frame, self.frame
 

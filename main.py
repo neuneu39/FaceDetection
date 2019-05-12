@@ -7,15 +7,9 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    # if request.form["video_value"] == 'face_detect':
-    #     return render_template('index.html', )
-    # else:
     if request.method == "POST":
         return render_template('index.html', video_detect = request.form["video_value"])
     else:
-        # filename = './disconnedted.jpg'
-        # bi = BytesIO(filename)
-        # return send_file(bi, mimetype='image/jpeg')
         return render_template('index.html')
 
     # "/" を呼び出したときには、indexが表示される。
