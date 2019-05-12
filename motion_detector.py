@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, Response, request
 
 from camera import VideoCamera
@@ -46,6 +47,8 @@ def generate(camera):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 # 0.0.0.0はすべてのアクセスを受け付けます。
 # webブラウザーには、「localhost:5000」と入力
