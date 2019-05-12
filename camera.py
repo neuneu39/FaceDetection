@@ -23,7 +23,7 @@ class VideoCamera(object):
         # cv2.imencode() は numpy.ndarray() を返すので .tobytes() で bytes 型に変換
 
     def get_motion_detection(self, frame):
-        _ image = self.video.read()
+        _, image = self.video.read()
         converted_frame = Detection(image)
         frame, facedetected_frame = converted_frame.motion_detection(frame)
         _, jpeg = cv2.imencode('.jpg', facedetected_frame)
