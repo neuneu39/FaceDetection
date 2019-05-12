@@ -5,9 +5,15 @@ from detection import Detection
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def index():
-    return render_template('index.html')
+    # if request.form["video_value"] == 'face_detect':
+    #     return render_template('index.html', )
+    # else:
+    if request.method == "POST":
+        return render_template('index.html', video_detect = request.form["video_value"])
+    else:
+        return render_template('index.html')
 
     # "/" を呼び出したときには、indexが表示される。
 
@@ -38,7 +44,7 @@ def video_feed():
     return Response(gen(VideoCamera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/face_detect')
+@app.route('/face_detect', methods=["GET", "POST"])
 def face_detect():
     return Response(generate(VideoCamera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
@@ -50,9 +56,9 @@ def generate(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-@app.route("/<name>", methods=["GET", "POST"])
-def namepage(name):
-    return render_template("name.html", name=name)
+# @app.route("/<name>", methods=["GET", "POST"])
+# def namepage(name):
+#     return render_template("name.html", name=name)
 
 
 @app.route("/odd_even", methods=["GET", "POST"])
