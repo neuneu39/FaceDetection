@@ -6,18 +6,21 @@
   <body>
     <h1>{{video_detect}} Ditect Streaming Demonstration</h1>
     <form action="/" method="post">
-      <button name="video_value" value="Motion">video_feed</button>
+      <button name="video_value" value="Motion">Stop Face Detection</button>
     </form>
     <form action="/" method="post">
-      <button name="video_value" value="Face">face_detection</button>
+      <button name="video_value" value="Face">Start Face Detection</button>
     </form>
-    {{video_detect}}
-    {% if video_detect == 'Face' %}
-    <img src="{{ url_for('video_feed') }}">
-    <!-- jinja2のテンプレートの書き方です。/video_feedを呼び出しています。 -->
-    {% elif video_detect == 'Motion' %}
+    <form action="/" method="post">
+      <button name="video_value" value="STOP">STOP</button>
+    </form>
+    {% if video_detect == 'Motion' %}
     <img src="{{ url_for('face_detect') }}">
     <!-- jinja2のテンプレートの書き方です。/video_feedを呼び出しています。 -->
+    {% elif video_detect == 'Face' %}
+    <img src="{{ url_for('video_feed') }}">
+    <!-- jinja2のテンプレートの書き方です。/video_feedを呼び出しています。 -->
+    {% else %}
     {% endif %}
   </body>
 </html>

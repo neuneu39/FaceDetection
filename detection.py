@@ -13,7 +13,6 @@ class Detection(object):
                                         minNeighbors=5)
 
         for x, y, w, h in faces:
-            # face_img = cv2.rectangle(self.frame, (x, y), (x+w, y+h), (0, 255, 0), 3)
             cv2.rectangle(self.frame, (x, y), (x+w, y+h), (0, 255, 0), 3)
 
         return self.frame
@@ -31,7 +30,7 @@ class Detection(object):
         # 輪郭を見つけて描写する
         (cnts, _) = cv2.findContours(thresh_frame_dilate.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         for contour in cnts:
-            if cv2.contourArea(contour) < 5000:
+            if cv2.contourArea(contour) < 10000:
                 continue
             (x, y, w, h) = cv2.boundingRect(contour)
             cv2.rectangle(self.frame, (x, y), (x+w, y+h), (0, 255, 0), 3)
